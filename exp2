@@ -1,0 +1,13 @@
+plain = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+cipher = "QWERTYUIOPASDFGHJKLZXCVBNM"   # sample substitution
+
+def mono_encrypt(text):
+    res = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            res += cipher[plain.index(ch)]
+        else:
+            res += ch
+    return res
+
+print(mono_encrypt("HELLO"))
