@@ -1,0 +1,47 @@
+import string
+
+def matrix(key):
+    key = "".join(dict.fromkeys(key.upper().replace("J","I")))
+    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+    for ch in key:
+        alphabet = alphabet.replace(ch, "")
+    table = key + alphabet
+    return [table[i:i+5] for i in range(0,25,5)]
+
+def playfair_encrypt(pt, table):
+    pt = pt.upper().replace("J","I")
+    res = ""
+
+    # make pairs
+    i=0
+    pairs = []
+    while i < len(pt):
+        a = pt[i]
+        b = pt[i+1] if i+1 < len(pt) else "X"
+        if a == b:
+            b = "X"
+            i += 1
+        else:
+            i += 2
+        pairs.append((a,b))
+
+    # find positions
+    def pos(c):
+        for r in range(5):
+            if c in table[r]:
+                return r, table[r].index(c)
+
+    for a,b in pairs:
+        r1,c1 = pos(a)
+        r2,c2 = pos(b)
+        if r1 == r2:
+            res += table[r1][(c1+1)%5] + table[r2][(c2+1)%5]
+        elif c1 == c2:
+            res += table[(r1+1)%5][c1] + table[(r2+1)%5][c2]
+        else:
+            res += table[r1][c2] + table[r2][c1]
+
+    return res
+
+tbl = matrix("KEYWORD")
+print(playfair_encrypt("HELLO", tbl))
