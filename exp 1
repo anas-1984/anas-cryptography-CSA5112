@@ -1,0 +1,10 @@
+def caesar_encrypt(text, k):
+    res = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            res += chr((ord(ch) - 65 + k) % 26 + 65)
+        else:
+            res += ch
+    return res
+
+print(caesar_encrypt("HELLO", 3))
