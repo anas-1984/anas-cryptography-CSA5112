@@ -1,0 +1,12 @@
+def affine_encrypt(text, a, b):
+    res = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            p = ord(ch) - 65
+            c = (a*p + b) % 26
+            res += chr(c + 65)
+        else:
+            res += ch
+    return res
+
+print(affine_encrypt("HELLO", 5, 8))
