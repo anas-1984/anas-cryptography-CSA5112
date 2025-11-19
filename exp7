@@ -1,0 +1,6 @@
+cipher = """53‡‡†305))6*;4826)..."""
+
+# Simple frequency counter
+from collections import Counter
+freq = Counter(cipher)
+print(fre
