@@ -1,0 +1,17 @@
+def affine_decrypt(c, a, b):
+    inv = pow(a, -1, 26)
+    res = ""
+    for ch in c:
+        if ch.isalpha():
+            x = ord(ch)-65
+            res += chr(((inv*(x-b)) % 26)+65)
+        else:
+            res += ch
+    return res
+
+cipher = "BU..."  # your ciphertext
+
+for a in range(1,26):
+    if gcd := __import__("math").gcd(a,26) == 1:
+        for b in range(26):
+            print(a,b,"→",affine_decrypt(cipher,a,b))
